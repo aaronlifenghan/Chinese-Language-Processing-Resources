@@ -1,0 +1,45 @@
+#!/usr/bin/perl -w
+#############################################################################################################################################################################################################
+##    For a detailed description of this source code, please read:                                                                                                                                      #####
+##    This code is to delete the spaces in the begining of the sentences in SIGHAN2008 CityU corpus.                                                                                                    #####
+##    This perl code is  written by Aaron Li-Feng Han in university of macau, 2013                                                                                                                      #####
+##    All Copyright (c) reserved by the authors. Corresponding author: Aaron Li-Feng Han < hanlifengaaron AT gmail DOC com >                                                                            #####
+##                                                                                                                                                                                                      #####
+##    Please cite paper below if you use the source code in your research and want to acknowledge the authors                                                                                           #####
+##    "Chinese Named Entity Recognition with Conditional Random Fields in the Light of Chinese Characteristics". 2013. Aaron Li-Feng Han, Derek Fai Wong and Lidia Sam Chao.                            #####
+##    Language Processing and Intelligent Information Systems. Lecture Notes in Computer Science Volume 7912, 2013, pp 57-68. M.A. Klopotek et al. (Eds.): IIS 2013.                                    #####
+##    Springer-Verlag Berlin Heidelberg 2013. http://dx.doi.org/10.1007/978-3-642-38634-3_8                                                                                                             #####
+##                                                                                                                                                                                                      #####
+##    Or "A Study of Chinese Word Segmentation Based on the Characteristics of Chinese". 2013. Aaron Li-Feng Han, Derek F. Wong, Lidia S. Chao, Liangye He, Ling Zhu and Shuo Li.                       #####
+##    Language Processing and Knowledge in the Web. Lecture Notes in Computer Science Volume 8105, 2013, pp 111-118. Volume Editors: Iryna Gurevych, Chris Biemann and Torsten Zesch.                   #####
+##    Springer-Verlag Berlin Heidelberg 2013. http://dx.doi.org/10.1007/978-3-642-40722-2_12                                                                                                            #####
+##                                                                                                                                                                                                      #####
+##    Source code and detailed works website: https://github.com/aaronlifenghan#!                                                                                                                       #####
+#############################################################################################################################################################################################################
+##    How to use this Perl code.                                                                                                                                                                        #####
+##    1. Put you original documents under the address in Line 34 of this Perl code.                                                                                                                     #####
+##    2. The result document will be shown under the address in Line 35 of this Perl code.                                                                                                              #####
+##                                                                                                                                                                                                      #####
+#############################################################################################################################################################################################################
+
+
+
+
+use utf8;  
+use Encode;  
+use Encode::CN;
+#use strict;
+
+
+open MAKE_TRAIN_TYPE,"<:encoding(UTF-8)","ReferType_result.2013.01" or die "can't open crf_type_train_utf16.seg\n";
+open DELETED_SPACE_BEGIN,">:encoding(UTF-8)","2008CityU_seg_test_result_in_ture_type.txt" or die "can't open crf_type_train_utf16.seg\n";
+
+while(<MAKE_TRAIN_TYPE>)
+	{
+		$_=~ s/^\s+//;
+		print DELETED_SPACE_BEGIN $_;
+	}
+close (MAKE_TRAIN_TYPE);
+close (DELETED_SPACE_BEGIN);
+
+
