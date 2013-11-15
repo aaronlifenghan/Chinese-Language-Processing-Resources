@@ -3,7 +3,7 @@
 ##    For a detailed description of this source code, please read:                                                                                                                                      #####
 ##    This code is to delete the spaces in the begining of the sentences in SIGHAN2008 CityU corpus.                                                                                                    #####
 ##    This perl code is  written by Aaron Li-Feng Han in university of macau, 2013                                                                                                                      #####
-##    All Copyright (c) reserved by the authors. Corresponding author: Aaron Li-Feng Han < hanlifengaaron AT gmail DOC com >                                                                            #####
+##    All Copyright (c) reserved by the authors. Corresponding author: Aaron Li-Feng Han < hanlifengaaron AT gmail DOT com >                                                                            #####
 ##                                                                                                                                                                                                      #####
 ##    Please cite paper below if you use the source code in your research and want to acknowledge the authors                                                                                           #####
 ##    "Chinese Named Entity Recognition with Conditional Random Fields in the Light of Chinese Characteristics". 2013. Aaron Li-Feng Han, Derek Fai Wong and Lidia Sam Chao.                            #####
