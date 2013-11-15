@@ -1,7 +1,7 @@
 #!/usr/bin/perl -w
 #############################################################################################################################################################################################################
 ##    For a detailed description of this evaluation metric and source code, please read:                                                                                                                #####
-##    This code is to convert the testing result of CRF++ Type content into the SIGHAN-2008 reference type.                                                                                             #####
+##    This code is to convert the testing result of CRF++ Type (https://code.google.com/p/crfpp/) content into the SIGHAN-2008 reference type.                                                          #####
 ##    This perl code is  written by Aaron Li-Feng Han in university of macau, 2013                                                                                                                      #####
 ##    All Copyright (c) reserved by the authors. Corresponding author: Aaron Li-Feng Han < hanlifengaaron AT gmail DOC com >                                                                            #####
 ##                                                                                                                                                                                                      #####
