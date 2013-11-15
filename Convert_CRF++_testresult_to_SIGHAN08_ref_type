@@ -1,0 +1,350 @@
+#!/usr/bin/perl -w
+#############################################################################################################################################################################################################
+##    For a detailed description of this evaluation metric and source code, please read:                                                                                                                #####
+##    This code is to convert the testing result of CRF++ Type content into the SIGHAN-2008 reference type.                                                                                             #####
+##    This perl code is  written by Aaron Li-Feng Han in university of macau, 2013                                                                                                                      #####
+##    All Copyright (c) reserved by the authors. Corresponding author: Aaron Li-Feng Han < hanlifengaaron AT gmail DOC com >                                                                            #####
+##                                                                                                                                                                                                      #####
+##    Please cite paper below if you use the source code in your research and want to acknowledge the authors                                                                                           #####
+##    "Chinese Named Entity Recognition with Conditional Random Fields in the Light of Chinese Characteristics". 2013. Aaron Li-Feng Han, Derek Fai Wong and Lidia Sam Chao.                            #####
+##    Language Processing and Intelligent Information Systems. Lecture Notes in Computer Science Volume 7912, 2013, pp 57-68. M.A. Klopotek et al. (Eds.): IIS 2013.                                    #####
+##    Springer-Verlag Berlin Heidelberg 2013. http://dx.doi.org/10.1007/978-3-642-38634-3_8                                                                                                             #####
+##                                                                                                                                                                                                      #####
+##    Or "A Study of Chinese Word Segmentation Based on the Characteristics of Chinese". 2013. Aaron Li-Feng Han, Derek F. Wong, Lidia S. Chao, Liangye He, Ling Zhu and Shuo Li.                       #####
+##    Language Processing and Knowledge in the Web. Lecture Notes in Computer Science Volume 8105, 2013, pp 111-118. Volume Editors: Iryna Gurevych, Chris Biemann and Torsten Zesch.                   #####
+##    Springer-Verlag Berlin Heidelberg 2013. http://dx.doi.org/10.1007/978-3-642-40722-2_12                                                                                                            #####
+##                                                                                                                                                                                                      #####
+##    Source code and detailed works website: https://github.com/aaronlifenghan#!                                                                                                                       #####
+#############################################################################################################################################################################################################
+##    How to use this Perl code.                                                                                                                                                                        #####
+##    1. Put you original documents under the address in Line 37 of this Perl code.                                                                                                                     #####
+##    2. The result document will be shown under the address in Line 38 of this Perl code.                                                                                                              #####
+##                                                                                                                                                                                                      #####
+#############################################################################################################################################################################################################
+
+use utf8;  
+use Encode;  
+use Encode::CN;
+#use strict;
+
+#open WORDLIST,"<:encoding(UTF-8)","temp.txt" or die "can't open train_utf16.ner\n";
+#open MAKE_DIC,">:encoding(UTF-8)","temp_without_tag.txt" or die "can't open name_list.txt\n";
+
+
+#open WORDLIST,"<:encoding(UTF-8)","try_train_utf16.seg" or die "can't open train_utf16.ner\n";
+#open MAKE_CRF_TYPE,">:encoding(UTF-8)","crf_type_try_train_utf16.seg" or die "can't open crf_type_train_utf16.seg\n";
+
+open WORDLIST,"<:encoding(UTF-8)","result.2013.01" or die "can't open train_utf16.ner\n";
+open MAKE_TRAIN_TYPE,">:encoding(UTF-8)","ReferType_result.2013.01" or die "can't open crf_type_train_utf16.seg\n";
+
+while(<WORDLIST>)
+	{
+		#chomp;
+		if(!($_=~ /^\s*$/))   ### if this is not an empty line then do these
+			{
+				chomp;
+				if($_=~ m/B/)   ### if there is B in the line ,means this is begining of a chunk
+					{
+						$_=~ s/\t//;
+						$_=~ s/B//;
+						print MAKE_TRAIN_TYPE "  ", $_;
+					}
+				elsif($_=~ m/I/)   ###if there is I in the line, means this is not begining of a chunk
+					{
+						$_=~ s/\t//;
+						$_=~ s/I//;
+						print MAKE_TRAIN_TYPE $_;
+					}
+			}
+		else
+			{
+				print MAKE_TRAIN_TYPE "  ","\n";
+			}
+	}
+close (WORDLIST);
+close (MAKE_TRAIN_TYPE);
+
+
+# open MAKE_TRAIN_TYPE,">:encoding(UTF-8)","train_type_template04.50000_result.txt" or die "can't open crf_type_train_utf16.seg\n";
+# while(<WORDLIST>)
+	# {
+		# $_=~ s/^\s+//;
+	# }
+# close (MAKE_TRAIN_TYPE);
+
+
+
+			# s/\t/ /g;
+			# # s/B-LOC//g;
+			# # s/I-LOC//g;
+			# # s/B-ORG//g;
+			# # s/I-ORG//g;
+			# # s/B-PER//g;
+			# # s/I-PER//g;
+			
+			# # #if(($_ =~ m/B/)||($_ =~ m/I/))
+			# # #	{
+					# print MAKE_CRF_TYPE $_;
+			# #		print MAKE_DIC "\n";
+					
+			# #	}
+
+# open WORDLIST,"<:encoding(utf8)","WWWordlist_of_training_data.txt" or die "can't open Wordlist_of_training_data.txt\n";
+# open MAKE_DIC,">:encoding(UTF-8)","make_dic.txt" or die "can't open make_dic.txt\n";
+# while(<WORDLIST>)
+	# {
+		# chomp;
+		# s/\d*//g;
+		# s/\s*//g;
+		# s/\t*//g;
+		# #Encode::_utf8_on($tem);
+		# $tem=$_;
+		# print MAKE_DIC $tem;
+		# print MAKE_DIC "\n";
+		# #$tem="";
+		# #$tem=Encode::_utf8_on("");
+		
+		
+	# }
+
+
+# close (WORDLIST);
+# close (MAKE_DIC);
+
+##using perl as calculator:#######################################
+#print exp(-(1/6+4/147))*(50/69);
+#print exp(-13/24)*(40/43);
+##print exp(-17/48)*(25/39);
+#####################################################################
+
+
+
+
+# #encode("GB2312",decode("utf8","000.txt"));
+# #$path="000.txt";
+# #open TEST, $path or die "can't open the $path .\n";
+# open TEST,"<:encoding(utf8)","000.txt" or die "can't open 000.txt\n";
+# #open FILEdic,"<:encoding(UTF-8)","tem_dic.txt" or die "can't open tem_dic.txt\n";
+# #encode("gb2312",decode("utf8","濮撳悕"));
+# #encode("GBK",decode("utf8","TEST"));
+# while(<TEST>)
+    # {
+        # chomp;
+	    # $config .=$_;
+    # }
+# #$config=decode("utf8",$config);
+# #$config=encode("Big5",decode("utf8","$config"));
+# #$config=decode("utf8",$config);
+# close TEST;
+# #$config=decode("utf8",$config);
+# #$config=encode("Big5",decode("utf8","$config"));
+# $config_len = length($config);
+# for($j=0;$j <$config_len;$j++)
+    # {
+	    # $store_arry[$j]=substr($config, $j, 1);
+	# }
+
+# #open(FILEstore, ">store.txt");
+# #open FILEstore,”>:encoding(utf8)”,store.txt or die "can't open store.txt\n";
+# open FILEstore,">:encoding(UTF-8)","store.txt" or die "can't open store.txt\n";
+# #open(FILEdic, "<tem_dic.txt");
+
+# # $tem=(@store_arry[1..4] cmp @store_arry[1..4]);
+# # print FILE $tem;
+# #print FILE @store_arry;
+# # for($i=1;$i<=4;$i++)
+	# # {
+		# # #print FILE $store_arry[$i];
+		# # $str0 .= $store_arry[$i];
+	# # }
+# #print FILE  $str0;
+# #print FILE $str0;
+# #print FILE ' ';
+# #$str0=@store_arry[1..4];
+# #print FILE @store_arry[1..4];
+# # while($str2=<FILE2>)
+    # # {
+	    # # #$str2=chomp($str2);
+		# # chomp($str2);
+		# # $_=$str2;
+		# # s/[\r]//g;
+		
+		# # #print FILE $_;
+		# # #$str0="@store_arry[1..4]";
+		# # #$str0=@store_arry[1..4];
+		# # #$tem=(@store_arry[1..4] cmp $str2);
+		# # #$tem=($str2 cmp $str0);
+		# # #$tem=($str2 eq $str0);
+		# # #print FILE $_;
+		# # if($_ eq $str0)
+		# # {	
+			# # #print FILE $_;
+			# # #print FILE $str0;
+			# # #print FILE ' ';
+		    # # last;
+		# # }
+		# # #$str2="";
+		
+		# # # if(($str2 cmp @store_arry[1..4])==0)
+		    # # # {
+			    # # # print FILE $str2;
+		        # # # print FILE ' ';
+			# # # }
+	# # }
+	
+# # print FILE $_;
+# # print FILE $str0;
+# # #print FILE $tem;
+# # print FILE ' ';
+	
+	
+	
+# #$comp= cmp(@store_arry[1..3],@store_arry[1..4]);
+# #$comp = (@store_arry[1..3] cmp @store_arry[1..3]);
+# #print FILE $comp;
+# #print FILE $store_arry[2];
+# #print FILE @store_arry[1..4];
+# #$m=10;$k=3;
+# # $str1=@store_arry[1..3];
+# # $str2=@store_arry[1..3];
+# # $match = index("$str2","$str1");
+# # #print FILE $match;
+# # if($match>=0)
+    # # {
+ 	    # # #print FILE $store_arry[2];
+		# # print FILE @store_arry[1..3];
+    # # }
+# # while(defined($line = <tem_dic.txt>))
+    # # {
+	    # # chomp($line);
+	    # # if((index($line,$store_arry[2]))!=-1)
+		# # #if(/$store_arry[2]/)
+		    # # {
+			    # # print FILE $store_arry[2];
+                # # print FILE ' ';
+				# # #last;
+			# # }
+	# # }
+# #print FILE @store_arry[$m..$m+$k];
+# #print FILE ' ';
+# # for($i=1,$i<=4,$i++)
+    # # {
+	    # # $fou .= $store_arry[$i];
+	# # }
+# #print FILE @store_arry[1..4];
+# # while($str2=<FILE2>)
+# # #while(<FILE2>)
+    # # {
+	    # # chomp($str2);
+		# # #for($n=1,$n<=4,$n++)
+		# # #$fou .= $store_arry[$n];
+		
+	    # # #$str1 = @store_arry[1..4];
+		# # #$match = index($str2,$str1);
+		# # #if($match>=0)
+		# # if($str2==@store_arry[1..4])
+		# # # if(/@store_arry[1..4]/)
+		     # # {
+			     # # print FILE @store_arry[1..4];
+				 # # print FILE ' ';
+				# # # print FILE $fou;
+			 # # }
+	    # # #print FILE "$str2";
+	# # }
+# #$str1 = @store_arry[1..4];
+# #print FILE $str1;
+
+# #print FILE @store_arry[1..4];
+# #print FILE $config_len;
+
+
+# $m=1;
+# while($m<$config_len)     ##$m's loop from 1 to the length of @store_arry
+    # {
+	    # $k=7; $flag=1;
+		# while($k>0)     ## $k's loop from 7 to 0
+		  # {
+		    # $str1="";     ##clear the $str1
+			# for($g=$m;$g<=$m+$k;$g++)
+			# {
+				# $str1 .= $store_arry[$g];
+			# }
+			# #Encode::_utf8_on($str1);
+			# #print FILEstore $str1;
+			# #print FILEstore ' ';
+			# #open(FILEdic, "<tem_dic.txt");
+			# #open FILEdic,”<:encoding(utf8)”,tem_dic.txt or die "Can’t open tem_dic.txt\n";
+			# open FILEdic,"<:encoding(UTF-8)","tem_dic.txt" or die "can't open tem_dic.txt\n";
+			# while($str2=<FILEdic>)
+			# #while(<FILE2>)     ##read the FILE2 line by line to match
+		        # {
+					# #Encode::_utf8_on($str2);
+					# #$str2=decode("utf8",$str2);
+					# chomp($str2);
+					# #chomp($_);
+					# $_=$str2;
+					# s/[\r]//g;
+				    # #$str1=@store_arry[$m..$m+$k];
+					# #$match = index("$str2","$str1");
+					# #if($match>=0)
+			        # #if(/@store_arry[$m..$m+$k]/)
+					# #$comp =($str2 cmp @store_arry[$m..$m+$k]);
+					# #$comp =($str2 <=> @store_arry[$m..$m+$k]);
+					# #print FILE $comp;
+					# #if(cmp($str2,@store_arry[$m..$m+$k])==0)
+					# #if($comp==0)
+					# #if($_ eq @store_arry[$m..$m+$k])
+					# #print FILEstore $_;
+					# #print FILEstore '-';
+					# #print FILEstore $str1;
+					
+					
+					# if($_ eq $str1)
+					    # {
+						    # $flag=0;
+							# #print FILEstore "sucess!";
+							# #print FILEstore "\n";
+							# #$m=$m+$k+1;
+							# #last;
+						    # #print FILE @store_arry[$m..$m+$k];
+							# #print FILEstore $str1;
+							# #$str1="";
+							# #print FILEstore $flag;
+							# #print FILE $str1;
+							# #print FILEstore ' ';
+							# #$flag=0;
+							# last;
+							
+						# }
+					# #print FILEstore "\n";
+						
+			    # }
+			
+			# if($flag==1)
+			    # {
+				    # $k--;
+				# }
+			# else
+			    # {
+				    # last;
+				# }
+		  # }
+		
+		# #print FILE $_;
+		# #print FILE $str1;
+		# print FILEstore @store_arry[$m..$m+$k];
+		# #print FILEstore $flag;
+		# print FILEstore ' ';
+		# $m=$m+$k+1;
+		# #$str1="";
+		# # if($k==0)
+		    # # {
+			    # # print FILE $store_arry[$m];
+				# # print FILE $flag;
+				# # print FILE ' ';
+				# # $m=$m+1;
+			# # }
+	# }
+# # print FILE $flag;
+# close(FILEstore);
+# close(FILEdic);
